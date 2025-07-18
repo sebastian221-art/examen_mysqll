@@ -29,28 +29,6 @@ DELIMITER ;
 2. PromedioDuracionAlquiler(PeliculaID)
 
 
-DELIMITER $$
-
-CREATE FUNCTION PromedioDuracionAlquiler(p_pelicula_id SMALLINT)
-RETURNS DECIMAL(5,2)
-DETERMINISTIC
-READS SQL DATA
-BEGIN
-    DECLARE promedio DECIMAL(5,2);
-
-    SELECT AVG(DATEDIFF(a.fecha_devolucion, a.fecha_alquiler))
-    INTO promedio
-    FROM alquiler a
-    JOIN inventario i ON a.id_inventario = i.id_inventario
-    WHERE i.id_pelicula = p_pelicula_id
-      AND a.fecha_devolucion IS NOT NULL;
-
-    RETURN IFNULL(promedio, 0);
-END;
-$$
-
-DELIMITER ;
-
 
 3. IngresosPorCategoria(CategoriaID)
 

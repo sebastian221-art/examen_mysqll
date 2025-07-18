@@ -44,15 +44,6 @@ END;
 
 4 LimpiarAuditoriaCada6Meses
 
-CREATE EVENT evento_limpiar_auditoria
-ON SCHEDULE EVERY 6 MONTH
-STARTS CURRENT_TIMESTAMP
-DO
-DELETE FROM cliente_auditoria
-WHERE fecha_modificacion < DATE_SUB(NOW(), INTERVAL 6 MONTH);
-
-
-
 5 ActualizarCategoriasPopulares
 
 
